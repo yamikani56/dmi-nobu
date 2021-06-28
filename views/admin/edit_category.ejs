@@ -1,0 +1,19 @@
+<%- include ../_layouts/adminheader%>
+
+
+    <div class="container px-12">
+        <h2 class="text-center text-blue-400 text-lg ">Edit a category</h2>
+        <a href="/admin/categories" class="py-2 uppercase rounded my-8 px-2 bg-blue-500 text-white font-bold">Back to all categories</a>
+        <br><br>
+        <form action="/admin/categories/edit-category/<%=id%>" class="flex flex-col  " method="post">
+            <div class="form-group">
+                <label class="text-xl text-gray-500" for="">Title</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="title" name="title" value="<%= title %>">
+            </div>
+ 
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+        </form>
+    </div>
+
+
+    <%- include ../_layouts/adminfooter %>

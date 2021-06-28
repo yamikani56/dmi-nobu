@@ -1,0 +1,105 @@
+<%-include _layouts/_pricing-table-with-js-toggle_header%>
+
+<body class="text-gray-900 font-work-sans h-screen bg-no-repeat bg-left-bottom sm:bg-svg-bottom">
+
+    <svg class="absolute top-0 right-0 h-full" xmlns="http://www.w3.org/2000/svg" width"375" height"658">
+      <g fill="none" fill-rule="evenodd" stroke="#D0D5F6" stroke-width="2">
+        <path d="M172.71-101C70.623-79.38 17.478-39.688 13.273 18.074c-6.307 86.643 231.598 17.186 136.358 198-95.241 180.813-181.318 185.29-136.358 298C58.233 626.784 178.96 685.954 319.21 641.2c93.501-29.836 144.652-140.545 153.453-332.126" />
+        <path d="M214.7-101C134.617-82.012 92.926-47.154 89.628 3.575c-4.948 76.093 181.679 15.094 106.966 173.89C121.882 336.262 54.36 340.192 89.628 439.18c35.269 98.986 129.974 150.95 239.995 111.646C402.97 524.622 443.096 427.395 450 259.141" />
+        <path d="M250.935-103c-60.604 16.56-92.153 46.963-94.65 91.208-3.743 66.367 137.488 13.165 80.949 151.664-56.54 138.5-107.638 141.927-80.948 228.261 26.69 86.335 98.359 131.656 181.618 97.376C393.41 442.655 423.775 357.855 429 211.108" />
+      </g>
+    </svg>
+  
+    <h1 class="text-center font-bold text-5xl mt-8 tracking-wide relative">Our Pricing</h1>
+  
+    <div class="flex flex-row justify-center my-4 text-sm tracking-tight font-medium text-gray-700">
+      <p class="mx-3">Two Meals,One Month, Three Months</p>
+  
+      <!-- Toggle Button -->
+      <label for="toggle" class="flex items-center cursor-pointer">
+        <!-- toggle -->
+        <div class="relative">
+          <!-- hidden input -->
+          <input id="toggle" type="checkbox" class="hidden" onclick="myFunction()" />
+          <!-- line -->
+          <div class="w-10 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+          <!-- dot -->
+          <div class="toggle_dot absolute w-5 h-5 bg-white rounded-full shadow inset-y-0 left-0"></div>
+        </div>
+      </label>
+  
+      <p class="mx-3">Daily, Weekly, Monthly</p>
+    </div>
+  
+    <div class="flex flex-col md:flex-row md:transform md:scale-75 lg:scale-100 justify-center">
+      <div class="border rounded-lg md:rounded-r-none text-center p-5 mx-auto md:mx-0 my-2 md:my-6 bg-gray-100 font-medium z-10 shadow-lg">
+        <div class="">One meal - Two meals</div>
+        <div id="month" class="font-bold text-6xl month hidden">Mk850.00</div>
+        <div id="annual" class="font-bold text-6xl annual">Mk1,700.00</div>
+        <hr>
+        <div class="text-sm my-3">Delivery & Take Aways included</div>
+        <hr>
+        <div class="text-sm my-3">Airtel Money, Mpamba & Mo82</div>
+        <hr>
+        <div class="text-sm my-3">One meal to Two meals a Day</div>
+        <hr>
+        <a href="#" target="_blank">
+          <div class="bg-gradient-base border border-blue-600 hover:bg-white text-white hover:text-blue-600 font-bold uppercase text-xs mt-5 py-2 px-4 rounded cursor-pointer">Learn More</div>
+        </a>
+      </div>
+  
+      <div class="border-transparent rounded-lg text-center p-5 mx-auto md:mx-0 my-2 bg-gradient text-white font-medium z-10 shadow-lg">
+        <div class="py-4">One Week - 4 Weeks
+          <div id="month" class="font-bold text-6xl month hidden">Mk11,900.00</div>
+          <div id="annual" class="font-bold text-6xl annual">Mk52,600.00</div>
+          <hr>
+          <div class="text-sm my-3">Delivery & Take Aways included</div>
+        <hr>
+        <div class="text-sm my-3">Airtel Money, Mpamba</div>
+        <hr>
+        <div class="text-sm my-3">One week to One Month Price Range</div>
+          <hr>
+          <a href="#" target="_blank">
+            <div class="bg-white border border-white hover:bg-transparent text-blue-600 hover:text-white font-bold uppercase text-xs mt-5 py-2 mpx-4 rounded cursor-pointer">Learn More</div>
+          </a>
+        </div>
+      </div>
+  
+      <div class="border rounded-lg  md:rounded-l-none text-center p-5 mx-auto md:mx-0 my-2 md:my-6 bg-gray-100 font-medium z-10 shadow-lg">
+        <div class="">One Month - Three Month</div>
+        <div id="month" class="font-bold text-6xl month hidden">Mk52,600.00</div>
+        <div id="annual" class="font-bold text-6xl annual">Mk192,800.00</div>
+        <hr>
+        <div class="text-sm my-3">Delivery & Take Aways included</div>
+        <hr>
+        <div class="text-sm my-3">Airtel Money, Mpamba</div>
+        <hr>
+        <div class="text-sm my-3">One month To Three Months Price Range</div>
+        <hr>
+        <a href="#" target="_blank">
+          <div class="bg-gradient-base border border-blue-600 hover:bg-transparent text-white hover:text-blue-600 font-bold uppercase text-xs mt-5 py-2 px-4 rounded cursor-pointer">Learn More</div>
+        </a>
+      </div>
+    </div>
+  
+    <!--JS for toggle-->
+    <script>
+      function myFunction() {
+        var x = document.querySelectorAll('.annual');
+        var y = document.querySelectorAll('.month');
+        for (var i = 0; i < x.length; i++) {
+          if (document.getElementById("toggle").checked == true) {
+            x[i].classList.add('hidden');
+            y[i].classList.remove('hidden');
+          } else {
+            x[i].classList.remove('hidden');
+            y[i].classList.add('hidden');
+          }
+        }
+      }
+    </script>
+  
+  </body>
+  <%-include _layouts/_pricing-table-with-js-toggle_footer%>
+
+  

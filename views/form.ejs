@@ -1,0 +1,166 @@
+<!-- header -->
+<% include _layouts/signinandupheader %>
+
+<!-- end of header -->
+
+ 
+    <div class="container">
+        <div class="forms-container">
+           
+            <!-- signin & signup section -->
+            <div class="signin-signup">
+               
+                    <!-- form section -->
+                    <form action="/users/login" method="POST" class="sign-in-form">
+                        <h2 class="title">Sign in</h2>
+                        <%if(locals.logout){%>
+                            <div class="py-4 px-4 bg-green-200 text-green-400 text-center">
+                                <%=logout%>
+                            </div>
+                            <%}%>
+
+                            <%- messages('messages', locals) %>
+                            <% if (errors) {%>
+                            <% errors.forEach(function(error) { %>
+                            <div class="py-2 text-capitalize bg-red-200 rounded-md mx-auto mt-3 border  border-red-500 px-3 text-center text-red-500 <%= error %>">
+                                <%= error.msg %>
+                            </div>
+                            <% });%>
+                            <% }%>
+
+                        <!-- username inputs -->
+                        <div class="input-field">
+                            <i class="fas fa-user">👥</i>
+                            <input type="text" name="username" id="" placeholder="Enter Your Username">
+                        </div>
+                       
+
+                        <!-- password input -->
+                        <div class="input-field">
+                            <i class="fas fa-lock">🔑</i>
+                            <input type="password" name="password" id="" placeholder="Password">
+                        </div>
+
+                        <!-- submit button -->
+                        <input type="submit" value="login" class="btn solid">
+
+                        <p class="social-text">Or Sign in with social platforms</p>
+
+                           <!-- social icons -->
+                           <div class="social-media">
+                            <a href="" class="social-icon">
+                                <img src="/images/instagram.svg" alt="">
+                                <!-- <i class="fas fa-facebook">
+                                    
+                                </i> -->
+                            </a>
+                            <a href="" class="social-icon">
+                                <!-- <i class="fas fa-facebook"></i> -->
+                                <img src="/images/whatsapp.svg" alt="">
+                            </a>
+                            <a href="" class="social-icon">
+                                <!-- <i class="fas fa-facebook"></i> -->
+                                <img src="/images/facebook.svg" alt="">
+                            </a>
+                            <a href="" class="social-icon">
+                                <!-- <i class="fas fa-facebook">
+                                </i> -->
+                                    <img class="gmail" src="/images/gmail.svg" alt="">
+
+                            </a>
+                        </div>
+                    </form>
+
+                    <form action="/users/register" method="post" class="sign-up-form">
+                        
+                        <div class="input-field">
+                            <i class="fas fa-user">👥</i>
+                            <input type="text" name="name"  id="" placeholder="Name" value="<%= typeof name != 'undefined'? name :''%>">
+                        </div>
+
+                        <!-- username inputs -->
+                        <div class="input-field">
+                            <i class="fas fa-user">👥</i>
+                            <input type="text" name="username"  id="" placeholder="UserName" value="<%= typeof username != 'undefined'? username :''%>">
+                        </div>
+
+                        <!-- username inputs -->
+                        <div class="input-field">
+                            <i class="fas fa-envelope">📥</i>
+                            <input type="email" name="email" id="" placeholder="Email" value="<%= typeof email != 'undefined'? email :''%>" >
+                        </div>
+
+                          <!-- password input -->
+                          <div class="input-field">
+                            <i class="fas fa-lock">🔑</i>
+                            <input type="password" name="password" id="" placeholder="Password" value="<%= typeof password != 'undefined'? password :''%>" >
+                        </div>
+
+
+                        <!-- password input -->
+                        <div class="input-field">
+                            <i class="fas fa-lock">🔑</i>
+                            <input type="password" name="password2" id="" placeholder="Confirm Password" value="<%= typeof password2 != 'undefined'? password2 :''%>">
+                        </div>
+
+                        <!-- submit button -->
+                        <input type="submit" value="Sign Up" class="btn solid">
+
+                        <p class="social-text">Or Sign up with social platforms</p>
+
+                        <!-- social icons -->
+                        <div class="social-media">
+                            <a href="" class="social-icon">
+                                <img src="/images/instagram.svg" alt="">
+                                <!-- <i class="fas fa-facebook">
+                                    
+                                </i> -->
+                            </a>
+                            <a href="" class="social-icon">
+                                <!-- <i class="fas fa-facebook"></i> -->
+                                <img src="/images/whatsapp.svg" alt="">
+                            </a>
+                            <a href="" class="social-icon">
+                                <!-- <i class="fas fa-facebook"></i> -->
+                                <img src="/images/facebook.svg" alt="">
+                            </a>
+                            <a href="" class="social-icon">
+                                <!-- <i class="fas fa-facebook">
+                                </i> -->
+                                    <img class="" src="/images/gmail.svg" alt="">
+
+                            </a>
+                        </div>
+                    </form>
+            </div>
+        </div>
+
+        <div class="panels-container">
+            <!-- left panel -->
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Welcome to Dmi Nobu</h3>
+                    <p>If Your New Here You Can Sign Up and Get Your Free Account With Us By Click The Sign Up Button Below</p>
+                    <button class="btn outline-none transparent" id="sign-up-btn">Sign up</button>
+                </div>
+                <img src="/images/undraw_Hamburger_8ge6(1).svg" alt="" class="image">
+            </div>
+
+            <!-- right panel -->
+
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>One of Us?</h3>
+                    <p>Then Log In By Clicking The Sign In Button Below And Start Ordering Today 😃</p>
+                    <button class="btn transparent" id="sign-in-btn">Sign in</button>
+                </div>
+                <img src="/images/undraw_ice_cream_s2rh.svg" alt="" class="image">
+            </div>
+        </div>
+
+    </div>
+
+<!-- header -->
+<% include _layouts/signinandupfooter %>
+<!-- end of header -->
+

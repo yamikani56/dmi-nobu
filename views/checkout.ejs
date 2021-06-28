@@ -1,0 +1,95 @@
+<% include _layouts/header %>
+<div class="container">
+<% if (typeof cart !== "undefined") { %>
+
+<h1 class="text-center text-gray-600 uppercase">Food Basket</h1>
+<br><br>
+<div class="container">
+<table class="min-w-max w-full table-auto">
+    
+    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+        <th class="py-3 px-6 text-left">Image</th>
+        <th class="py-3 px-6 text-left">Title</th>
+        <th class="py-3 px-6 text-left">Price</th>
+        <th class="py-3 px-6 text-left">Quantity</th>
+        <th class="py-3 px-6 text-left"></th>
+        <th class="py-3 px-6 text-left">Subtotal</th>
+    </tr>
+    
+    <% var total = 0; %>
+    <% cart.forEach(function(product){ %>
+    <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+    <% total += +sub %>
+    <tr class="border-b border-gray-200 text-gray-600 uppercase text-sm leading-normal hover:bg-gray-100">
+        <td><img class=" h-18 w-3 cpi" src="<%= product.image %>" alt=""></td>
+        <td class="py-3 px-6 text-left"><%= product.title %></td>
+        <td class="py-3 px-6 text-left">MK<%= product.price %></td>
+        <td class="py-3 px-6 text-left"> <p class="bg-gray-200 text-gray-600 text-center rounded-full h-8 w-8  "> <%= product.qty %> </p> </td>
+        <td class="py-3 px-6 text-left flex flex-row my-auto">
+            <a class="bg-green-200 text-green-400 py-1 px-3 rounded-full text-xs text-gray-600 text-sm font-light" class="" href="/cart/update/<%= product.title %>?action=add">+</a>&nbsp;
+            <a class="bg-red-200 text-red-400 py-1 px-3 rounded-full text-xs text-gray-600 text-sm font-light" href="/cart/update/<%= product.title %>?action=remove">-</a>&nbsp;
+            <a href="/cart/update/<%= product.title %>?action=clear"><svg class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg> </a> &nbsp; 
+        </td>
+        <td class="py-3 px-6 text-left">MK<%= sub %></td>
+    </tr>
+    <% }); %>
+    <tr >
+        <td class="p-12" colspan="6" align="right"><b>Total: </b> MK<%= parseFloat(total).toFixed(2) %></td>
+    </tr>
+    <tr class="">
+        <td colspan="5" align="right">   
+            <a class="clearcart p-2 rounded bg-red-100 text-red-500 border-4 border-red-200 uppercase font-bold" href="/cart/clear">Clear cart</a>
+        </td>
+        <td colspan="5" align="right">
+            <a class=" buynow p-2 rounded bg-green-100 text-green-500 border-4 border-green-200 uppercase mt-12 font-bold" href="#">Buy now</a>
+        </td>
+    </tr>
+    
+</table>
+
+<form class="pp" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_cart">
+<input type="hidden" name="upload" value="1">
+<input type="hidden" name="business" value="jultranet-facilitator@gmail.com">
+<% var num = 0; %>
+<% cart.forEach(function(p){ %>
+    <% num++ %>
+    <input type="hidden" name="item_name_<%= num %>" value="<%= p.title %>">
+    <input type="hidden" name="amount_<%= num %>" value="<%= p.price %>">
+    <input type="hidden" name="quantity_<%= num %>" value="<%= p.qty %>">
+<% }); %>
+<input type="hidden" name="currency_code" value="MW">
+<input type="hidden" name="amount" value="<%= total %>">
+<input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+
+<% } else {%>
+<h3 class="text-center py-2 text-capitalize bg-red-200 container rounded-md mx-auto mt-3 border border-3 border-red-500 px-3 text-center text-red-500 ">Your Food Basket is empty.</h3>
+<% } %>
+</div>
+</div>
+<script>
+    
+$(function() {
+   
+    $('a.clearcart').on('click', function () {
+        if (!confirm('Confirm clear cart'))
+            return false;
+    });
+    
+    $('a.buynow').on('click', function (e) {
+        e.preventDefault();
+        
+        $.get('/cart/buynow', function() {
+            $('form.pp input[type=image]').click();
+            $('.ajaxbg').show();
+        });
+    });
+        
+});
+    
+</script>
+
+<% include _layouts/footer %>

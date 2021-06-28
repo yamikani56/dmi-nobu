@@ -1,0 +1,34 @@
+<%- include ../_layouts/adminheader %>
+
+
+    <div class="container flex flex-col justify-between py-8  mx-auto px-12">
+ <div>
+ 
+    <a href="/admin/categories/add-category" class="py-2 rounded my-8 px-2 bg-blue-500 text-white uppercase font-bold">Add new category</a>
+</div>
+<div class=" h-screen rounded-md mt-8 shadow-md bg-gray-100 ">
+<table class=" min-w-max w-full rounded-md  table-auto ">
+    <thead>
+      <tr class="bg-gray-200 text-gray-600 uppercase text-sm rounded-md leading-normal">
+        <th class="py-3 px-6 text-left">Category</th>
+        <th class="py-3 px-6 text-left">Edit</th>
+        <th class="py-3 px-6 text-left">Delete</th>
+      </tr>
+    </thead>
+    <tbody class="p-12 bg-gray-100 px-6  rounded-md h-screen">
+      <% categories.forEach(function(cart){%>
+        <tr class="border-b ">
+            <td class="py-3 px-6 text-gray-600 uppercase text-sm text-left"><%=cart.title%></td>
+            <td class="py-3 px-6 text-left bg-green-300 text-green-600 ring-4 ring-green-200 rounded-md border-green-500 my-5"><a href="/admin/categories/edit-category/<%=cart._id %>">Edit</a></td>
+             <td class="confirmDeletion text-center py-2 ring-red-200 ring-4 rounded-md bg-red-300  text-red-600 border-red-500"><a href="/admin/categories/delete-category/<%=cart._id%>">Delete</a></td>
+        </tr>
+     
+      <%})%>
+    </tbody>
+  </table>
+</div>
+    </div>
+
+
+ 
+    <%- include ../_layouts/adminfooter %>

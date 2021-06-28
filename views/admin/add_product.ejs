@@ -1,0 +1,64 @@
+<%- include ../_layouts/adminheader %>
+
+
+    <div class="container px-12">
+        <h2 class="text-center text-blue-400 text-lg ">Add a product</h2>
+        <a href="/admin/products" class="py-2 uppercase rounded my-8 px-2 bg-blue-500 text-white font-bold">Back to all products</a>
+        <br><br>
+        <form action="/admin/products/add-product" class="flex flex-col" enctype="multipart/form-data" method="post">
+            <div class="contaier">
+                <label for="">Title</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="title" value="<%= title %>" placeholder="Title">
+            </div>
+            
+            <div class="container">
+                <label for="">Description</label>
+                <textarea name="desc" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" cols="30" rows="10" placeholder="Description"><%= desc %></textarea>
+            </div>
+            
+            <div class="container>
+                <label for="">Category</label>
+                <select name="category" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <% categories.forEach(function(cat){ %>
+                        <option value="<%= cat.slug %>"><%= cat.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="container">
+                <label for="">Price</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="price" value="<%= price %>" placeholder="Price">
+            </div>
+            
+            <div class="container h-full">
+                <label for="">Image</label>
+                <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="image" id="img">
+                <img class="h-30" src="#" id="imgPreview" alt="">
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+        </form>
+
+        <script>
+    
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+                    }
+                    
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+            $("#img").change(function() {
+                readURL(this);
+            });
+            
+        </script>
+    </div>
+
+
+
+    <%- include ../_layouts/adminfooter %>

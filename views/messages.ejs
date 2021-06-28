@@ -1,0 +1,9 @@
+ 
+<% Object.keys(messages).forEach(function (type) { %>
+    <div class="py-2 text-capitalize bg-purple-200 rounded-md mx-auto mt-3 border border-3 border-purple-500 px-3 text-center text-purple-500 <%= type %>">
+      <% messages[type].forEach(function (message) { %>
+        <%= message %>
+      <% }) %>
+    </div>
+    <% }) %>
+ 

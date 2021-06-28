@@ -1,0 +1,118 @@
+<%- include ../_layouts/adminheader %>
+
+
+    <div class="container px-12">
+        <h2 class="text-center text-blue-400 text-lg ">Edit a product</h2>
+        <a href="/admin/products" class="py-2 uppercase rounded my-8 px-2 bg-blue-500 text-white font-bold">Back to all products</a>
+        <br><br>
+        <form action="/admin/products/edit-product/<%= id %>"" class="flex flex-col  " enctype="multipart/form-data" method="post">
+            <div class="container">
+                <label for="">Title</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="title" value="<%= title %>" placeholder="Title">
+            </div>
+            
+            <div class="container">
+                <label for="">Description</label>
+                <textarea name="desc" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" cols="30" rows="10" placeholder="Description"><%= desc %></textarea>
+            </div>
+            
+            <div class="container">
+                <label for="">Category</label>
+                <select name="category" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <% categories.forEach(function(cat){ %>
+                        <option value="<%=cat.slug %>"
+                        <% if (cat.slug == category) { %>
+                        selected="selected"
+                        <% } %>        
+                        ><%= cat.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="container">
+                <label for="">Price</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="price" value="<%= price %>" placeholder="Price">
+            </div>
+            
+            <div class="container>
+                <label for="" >Current Image</label>
+                <p>
+                    <% if (image == "") { %>
+                    <img id="noimage" src="/images/noimage.png" alt="">
+                    <% } else {%>
+                    <img id="noimage" src="/product_images/<%=id%>/<%=image%>" alt="">
+                    <% } %>
+                </p>
+            </div>
+            
+            <div class="container">
+                <label for="">Upload Image</label>
+                <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="image" id="img">
+                <img src="#" id="imgPreview" alt="">
+            </div>
+            
+            <input type="hidden" name="pimage" value="<%= image %>">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+        </form>
+
+        <hr>
+<h3 class="page-header">Gallery</h3>
+
+<ul class="gallery">
+    <% galleryImages.forEach(function(image){ %>
+    <% if (image != "thumbs") { %>
+    <li>
+        <img src="./public/product_images/<%=id%>/gallery/thumbs/<%=image %>" alt="">&nbsp;
+        <a class="confirmDeletion" href="/admin/products/delete-image/<%=image%>?id=<%=id%>">delete</a>
+    </li>
+    <% } %>
+    <% }); %>
+</ul>
+
+<br><br>
+<form action="/admin/products/product-gallery/<%=id%>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload">
+    </div>
+</form>
+
+<link rel="stylesheet" href="/css/basic.css"/>
+<link rel="stylesheet" href="/css/dropzone.css"/>
+<script src="/js/dropzone.js"></script>
+<script>
+    
+    // Preview image
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#img").change(function() {
+        readURL(this);
+    });
+    
+    // Dropzone
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "image/*",
+        init: function() {
+            this.on("queuecomplete", function(file) {
+               setTimeout(function() {
+                location.reload()
+                }, 1000); 
+            });
+        }
+    }
+    
+</script>
+    </div>
+
+
+    <%- include ../_layouts/adminfooter %>

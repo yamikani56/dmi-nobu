@@ -1,0 +1,25 @@
+
+    <script src="/js/restarunt_main.js"></script>
+    <script>
+    
+      $(function() {
+         
+          $('a.clearcart').on('click', function () {
+              if (!confirm('Confirm clear cart'))
+                  return false;
+          });
+          
+          $('a.buynow').on('click', function (e) {
+              e.preventDefault();
+              
+              $.get('/cart/buynow', function() {
+                  $('form.pp input[type=image]').click();
+                  $('.ajaxbg').show();
+              });
+          });
+              
+      });
+          
+      </script>
+    </body>
+    </html>

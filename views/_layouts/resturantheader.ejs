@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='/boxicons/boxicons.min.css' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="fa/font-awesome.css">
+    <link rel="stylesheet" href="/css/restarunt_styles.css">
+
+    <title>Dmi Nobu</title>
+</head>
+
+<body class="">
+
+    <!--========== SCROLL TOP ==========-->
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class='bx bx-chevron-up scrolltop__icon'></i>
+    </a>
+
+    <!--========== HEADER ==========-->
+    <header class="l-header mb-12" id="header">
+        <nav class="nav bd-container ">
+            <a href="#" class="nav__logo">DMI Nobu</a>
+            
+            <div class="nav__menu " id="nav-menu">
+                 <ul class="nav__list ">
+                    <% pages.forEach(function(page){ %>
+                        <% if (page.slug == "home") { %>
+                        <a class="nav__link mx-2" href="/"><%=page.title %></a>
+                        <% } else {%>
+                        <a class="nav__link mx-2"
+                            href="/<%=page.slug %>"><%=page.title %></a>
+                        <% } %>
+                        <% }); %>
+                    <li class="nav__item"> 
+                        
+                    <% categories.forEach(function(c){ %>
+                    <a class="nav__link mx-2"
+                        href="/products/<%=c.slug %>"><%=c.title%></a>
+                    <% }); %></li>
+                    <li class="nav__item">
+                        <a class="text-gray-500 hover:text-green-400" href="/cart/checkout">Food Basket(
+                            <% if (typeof cart !== "undefined") { %>
+                            <%= cart.length %>
+                            <% } else {%>
+                            0
+                            <% } %>
+                            )</a>
+                        </a>
+                            <% if (user && user.admin == 1) { %>
+                                <a class="nav__link mx-2" href="/admin/pages">Admin Area</a>
+                                <% }%>
+                                </li>
+
+                        <% if (user) { %>
+                        <a class="nav__link mx-2" href="">Welcome, <%= user.username %> </a>
+                            <a href="/users/logout" class="bg-blue-400 py-2 px-2 rounded-md text-white">log out </a>
+                    </li>
+                    <% } else {%>
+                    <a class="nav__link mx-2" href="/users/login" class="nav__link">Log in</a>
+                    <a class="nav__link mx-2" href="/users/register">Sign
+                        Up</a>
+                    <% } %>
+                   
+
+                    <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+    

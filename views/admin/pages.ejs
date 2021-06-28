@@ -1,0 +1,48 @@
+<%- include ../_layouts/adminheader  %>
+
+
+    <div class="container flex flex-col justify-between py-8  mx-auto px-12">
+ <div>
+ 
+    <a href="/admin/pages/add-page" class="py-2 uppercase rounded my-8 px-2 bg-blue-500 text-white font-bold">Add new page</a>
+</div>
+ 
+<table class=" min-w-max w-full rounded-md mt-9  table-auto sorting">
+    <thead  >
+      <tr class="home bg-gray-200 text-gray-600 uppercase text-sm rounded-md leading-normal">
+        <th class="py-3 px-6 text-left">Title</th>
+        <th class="py-3 px-6 text-left">Edit</th>
+        <th class="py-3 px-6 text-left">Delete</th>
+      </tr>
+    </thead>
+    <tbody class="p-12 bg-gray-100 px-6  h-screen">
+      <% pages.forEach(function(page){%>
+        <tr id="id_<%=page._id%>" class="border-b border-gray-200 hover:bg-gray-100 <%=page.slug%> ">
+            <td class="py-3 px-6 text-gray-600 uppercase text-sm text-left"><%=page.title%></td>
+            <td class="py-3 px-6 text-left bg-green-300 text-green-600 ring-4 ring-green-200 rounded-md border-green-500 my-5"><a href=" /admin/pages/edit-page/<%=page._id %>">Edit</a></td>
+            <% if (page.slug == 'home') {%>
+            <td></td>
+            <%}else {%>
+                <td class="confirmDeletion text-center py-2 ring-red-200 ring-4 rounded-md bg-red-300  text-red-600 border-red-500 "><a href=" /admin/pages/delete-page/<%=page._id%>">Delete</a></td>
+                <%}%>
+        </tr>
+      <%})%>
+    </tbody>
+  </table>
+</div>
+ 
+
+
+<script src="/js/jquery-ui.min.js"></script>
+<script>
+    $('tbody').sortable({
+        items:"tr:not('.home')",
+        placeholder:"ul-state-highlight",
+        update:function(){
+            let ids = $('tbody').sortable("serialize")
+            let url = "/admin/pages/reorder-page"
+            $.post(url,ids)
+        }
+    })
+</script>
+    <%- include  ../_layouts/adminfooter  %>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/drop.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title  %>
+    </title>
+</head>
+<body>
+   
+    <nav class="bg-gray-100 shadow-xl">
+        <div class="max-w-7xl mx-auto px-5">
+            <div class="flex justify-between">
+                <div class="flex space-x-1">
+                    <div>
+                        <a href="/" class="flex py-5 px-4 text-gray-500 hover:text-gray-900 font-extrabold">
+                            DMI Nobu 
+                        </a>
+                    </div>
+                    <div class=" hidden md:flex space-x-4 items-center">
+            
+                        <% pages.forEach(function(page){ %>
+                        <% if (page.slug == "home") { %>
+                        <a class="py-5 px-4 text-gray-500 hover:text-green-400" href="/"><%=page.title %></a>
+                        <% } else {%>
+                        <a class="py-5 px-4 text-gray-500 hover:text-green-400"
+                            href="/<%=page.slug %>"><%=page.title %></a>
+                        <% } %>
+                        <% }); %>
+
+            
+                            <% categories.forEach(function(c){ %>
+                            <a class="py-5 px-4 text-gray-500 hover:text-green-400"
+                                href="/products/<%=c.slug %>"><%=c.title%></a>
+                            <% }); %>
+                    </div>
+                </div>
+                <div class=" hidden md:flex items-center space-x-1">
+                    <a class="text-gray-500 hover:text-green-400" href="/cart/checkout">Food Basket(
+                        <% if (typeof cart !== "undefined") { %>
+                        <%= cart.length %>
+                        <% } else {%>
+                        0
+                        <% } %>
+                        )</a>
+                    <% if (user) { %>
+                    <a class="text-gray-500 hover:text-green-400" href="/users/logout">Hi, <%= user.username %> ( logout )</a></li>
+                    <% } else {%>
+                    <a href="/users/login" class="py-5 text-gray-500 hover:text-green-400 px-4">Log in</a>
+                    <a href="/users/register"
+                        class="py-2 hover:text-yellow-900 px-4 hover:bg-yellow-400 bg-yellow-500 text-yellow-900 rounded">Sign
+                        Up</a>
+                    <% } %>
+                    <% if (user && user.admin == 1) { %>
+                    <a class="py-5 text-gray-500 hover:text-green-400 px-4" href="/admin/pages">Admin Area</a>
+                    <% }%>
+
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hidden mobile-menu md:hidden">
+            <a href="" class="block py-4 px-4">Home</a>
+            <a href="" class="block py-4 px-4">Contacts</a>
+            <a href="" class="block py-4 px-4">Pricing</a>
+            <a class="block py-4 px-4" href="/cart/checkout">Food Basket(
+                <% if (typeof cart !== "undefined") { %>
+                <%= cart.length %>
+                <% } else {%>
+                0
+                <% } %>
+                )</a>
+            <% if (user) { %>
+            <a class="block py-4 px-4" href="/users/logout">Hi, <%= user.username %> ( logout )</a></li>
+            <% } else {%>
+            <a href="/users/login" class="py-5 hover:text-gray-900 px-4">Log in</a>
+            <a href="/users/register"
+                class="py-2 hover:text-yellow-900 px-4 hover:bg-yellow-400 bg-yellow-500 text-yellow-900 rounded">Sign
+                Up</a>
+            <% } %>
+            <% if (user && user.admin == 1) { %>
+            <a class="text-gray-500 hover:text-green-400" href="/admin/pages">Admin Area</a>
+            <% }%>
+
+        </div>
+    </nav>
+ 
+      
+      </div>
+ 
+    <div class="container mx-auto h-screen">
+        <%- messages('messages', locals) %>
+        <% if (errors) {%>
+        <% errors.forEach(function(error) { %>
+        <div class="alert alert-danger">
+            <%= error.msg %>
+        </div>
+        <% });%>
+        <% }%>
