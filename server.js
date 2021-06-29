@@ -7,9 +7,9 @@ let expressValidator = require('express-validator')
 let fileUpload = require('express-fileupload')
 var passport = require('passport');
 let morgan = require('morgan')
-// mongodb+srv://yamikani:YaMikani56.@dmi-nobu.ny83m.mongodb.net/my_database?retryWrites=true&w=majority
+//mongodb://localhost:27017/my_database 
     // connect to database
-    mongoose.connect('mongodb://localhost:27017/my_database',
+    mongoose.connect('mongodb+srv://yamikani:YaMikani56.@dmi-nobu.ny83m.mongodb.net/my_database?retryWrites=true&w=majority',
     {
         useNewUrlParser:true,
         useUnifiedTopology:true
